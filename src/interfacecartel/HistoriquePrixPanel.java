@@ -72,11 +72,7 @@ public class HistoriquePrixPanel extends JPanel {
         this.add(txt);
 
     }
-
-    public void dummy() {
-
-    }
-
+   
     public class grouptimeHandeler implements ActionListener {
 
         @Override
