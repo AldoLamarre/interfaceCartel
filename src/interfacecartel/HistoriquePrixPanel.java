@@ -74,7 +74,7 @@ public class HistoriquePrixPanel extends JPanel {
     }
    
     public class grouptimeHandeler implements ActionListener {
-
+         // patch invoke later
         @Override
         public void actionPerformed(ActionEvent ae) {
            JToggleButton jtb = (JToggleButton) ae.getSource() ;
@@ -85,6 +85,26 @@ public class HistoriquePrixPanel extends JPanel {
                     txt.setText("Month");
                 } else if (jtb == day) {
                     txt.setText("Day");
+                }              
+                JPanel jpn = (JPanel) jtb.getParent(); 
+                jpn.revalidate();
+           });
+        }
+
+    }
+    
+    public class grouppriceHandeler implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+           JToggleButton jtb = (JToggleButton) ae.getSource() ;
+            SwingUtilities.invokeLater(() -> {
+                if (jtb == average) {
+                   // TODO
+                } else if (jtb == last) {                    
+                   
+                } else if (jtb == first) {
+                    
                 }              
                 JPanel jpn = (JPanel) jtb.getParent(); 
                 jpn.revalidate();

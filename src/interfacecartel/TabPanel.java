@@ -13,7 +13,6 @@ import javax.swing.*;
 public class TabPanel extends JTabbedPane {
     
     public TabPanel() {
-        super();
         createtab();
         
     }

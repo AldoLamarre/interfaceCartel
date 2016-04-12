@@ -14,8 +14,7 @@ import javax.swing.*;
 public class CartelWindow extends JFrame  {
     
     
-    public CartelWindow(){
-        super(); 
+    public CartelWindow(){      
         TabPanel tb = new TabPanel();
         this.setVisible(true);
         this.setSize(1280, 720);

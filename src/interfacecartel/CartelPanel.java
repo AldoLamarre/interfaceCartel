@@ -17,7 +17,9 @@ public class CartelPanel extends JPanel {
     JButton search;
     JLabel cartelLbl;
     JTable compagnie;
-
+    JScrollPane tlbcontainer;
+    
+    
     public CartelPanel() {
         addcomponent();
     }
@@ -25,15 +27,29 @@ public class CartelPanel extends JPanel {
     private void addcomponent() {
         cartelTxt = new JTextField();
         search = new JButton();
+        tlbcontainer= new JScrollPane();
+        
         compagnie = new JTable();
         cartelLbl = new JLabel();
-
+        
+        tlbcontainer.add(compagnie);
         this.add(cartelTxt);
         this.add(search);
-        this.add(compagnie);
+        this.add(tlbcontainer);
         this.add(cartelLbl); 
         
-          
-        
     }
+    
+    public class Cartelquery implements Runnable  {
+
+        @Override
+        public void run() {
+            
+        }
+    
+    
+    
+    }
+    
+    
 }
