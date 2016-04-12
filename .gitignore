@@ -1,6 +1,7 @@
 *
-!src/
-!nbproject/
 !libraries/
+!libraries/*
 !Cartel/
+!Cartel/*
+!src/*
 !.gitignore
