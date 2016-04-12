@@ -12,11 +12,19 @@ import javax.swing.*;
  * @author Al
  */
 public class CompagniePanel extends JPanel {
-    
-    public CompagniePanel(){
-    
-        
-    
+    private SelectionPanel selectionPanel;
+    private AffichageCompagniePanel affComPan;
+
+    public CompagniePanel()
+    {
+        addPanel();
     }
     
+    private void addPanel()
+    {
+        selectionPanel = new SelectionPanel();
+        affComPan = new AffichageCompagniePanel();
+        this.add(selectionPanel);
+        this.add(affComPan);
+    }
 }
