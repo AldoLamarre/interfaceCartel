@@ -37,8 +37,28 @@ public class AffichageCompagniePanel extends JPanel{
         JPanel compagnie = new JPanel();
         compagnie.setLayout(new GridBagLayout());
         
+        String[] gisColumns = {"ID", "Nom", "Pays",
+        "Geolocalisation", "Debut exploitation", "Fin exploitation", "Production journaliere"};
+        
+        String[] compColumns = {"ID", "Nom"};
+        
+        Object[][] gisData = {
+            {"TestID", "teeeeest", "QUÉBEC!", "Quelquepart", "Aujourd'hui", "Demain", "190$"
+        },
+        {"TestID", "teeeeest", "QUÉBEC!", "Quelquepart", "Aujourd'hui", "Demain", "192$"
+        }
+        };
+        
+        Object[][] compData = { {"4","Geant Dormant"},{"5","Agnico Eagle"}};
+        
+        final JTable table1 = new JTable(compData, compColumns);
+        final JTable table2 = new JTable(gisData, gisColumns);
+        
+        JScrollPane compTable = new JScrollPane(table1);
+        JScrollPane gisTable = new JScrollPane(table2);
+        
         Box compagnieBox = Box.createVerticalBox();
-        compagnieBox.setPreferredSize( new Dimension( 700, 300) );
+        compagnieBox.setPreferredSize( new Dimension( 1000, 300) );
         
         adresse = new JLabel("adresse: ");
         compagnieBox.add(adresse);
@@ -46,14 +66,10 @@ public class AffichageCompagniePanel extends JPanel{
         compagnieBox.add(cartel);
         sous_compagnies = new JLabel("sous-compagnies: ");
         compagnieBox.add(sous_compagnies);
+        compagnieBox.add(compTable);
         gisements = new JLabel("gisements: ");
         compagnieBox.add(gisements);
-        dateDeb = new JLabel("date de début d'exploitation: ");
-        compagnieBox.add(dateDeb);
-        dateFin = new JLabel("date de fin d'exploitation: ");
-        compagnieBox.add(dateFin);
-        prodJour = new JLabel("production journalière: ");
-        compagnieBox.add(prodJour);
+        compagnieBox.add(gisTable);
   
         compagnieBox.setBorder(BorderFactory.createTitledBorder("Compagnie"));
         
