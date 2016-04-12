@@ -3,5 +3,6 @@
 !libraries/*
 !Cartel/
 !Cartel/*
+!src/
 !src/*
 !.gitignore

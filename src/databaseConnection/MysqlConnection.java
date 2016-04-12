@@ -7,14 +7,14 @@ package databaseConnection;
 
 import com.mysql.jdbc.jdbc2.optional.*;
 import java.sql.*;
-import net.proteanit.sql.DbUtils;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import net.proteanit.sql.DbUtils;
 import javax.swing.*;
 
 /**
  *
- * @author Al
+ * @author
  */
 public class MysqlConnection {
 
@@ -60,37 +60,64 @@ public class MysqlConnection {
      * @return
      * @throws SQLException
      */
-    public ResultSet send_request(String s, JTable jTbl) throws SQLException {
-        Connection c;
-        Statement st;
-        ResultSet rs;
+    public void send_request(String s, JTable jTbl) throws SQLException {
 
-        c = dataCartel.getConnection();
-        st = c.createStatement();
-        rs = st.executeQuery(s);
-        
-        SwingUtilities.invokeLater(() -> {
-            jTbl.setModel(DbUtils.resultSetToTableModel(rs));
-        });
+        RunQuery r = new RunQuery() {
+            Connection c;
+            Statement st;
+            ResultSet rs;
 
-        return rs;
+            @Override
+            public void run() {
+
+                try {
+                    c = dataCartel.getConnection();
+                    st = c.createStatement();
+                    rs = st.executeQuery(s);
+                    SwingUtilities.invokeLater(() -> {
+                        jTbl.setModel(DbUtils.resultSetToTableModel(rs));
+                    });
+                    System.out.println(rs.toString());
+                } catch (SQLException ex) {
+                    Logger.getLogger(MysqlConnection.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            @Override
+            public ResultSet getRs() {
+                return rs;
+            }
+
+        };
+        Thread t = new Thread(r);
+        t.start();       
     }
 
     public static void main(String[] args) {
         MysqlConnection msq = new MysqlConnection();
-        JTable jTbltest;
+        JTable jTbltest=  new JTable();
         JFrame frm = new JFrame();
-
+        ResultSet rs ;
+        
         try {
-            ResultSet rs = msq.send_request("SHOW TABLES");
-            jTbltest = new JTable(DbUtils.resultSetToTableModel(rs));
+            msq.send_request("SHOW TABLES",jTbltest);
+           // jTbltest = new JTable(DbUtils.resultSetToTableModel(rs));
             frm.getContentPane().add(jTbltest);
-            System.out.println(rs.toString());
+            //System.out.println(rs.toString());
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         frm.setSize(1280, 720);
         frm.setVisible(true);
+    }
+
+    interface RunQuery extends Runnable {
+
+        @Override
+        public void run();
+
+        public ResultSet getRs();
+
     }
 }
