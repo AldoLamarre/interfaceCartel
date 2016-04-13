@@ -5,7 +5,6 @@
  */
 package interfacecartel;
 
-import databaseConnection.MysqlConnection;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import javax.swing.*;
@@ -20,7 +19,7 @@ public class CompagniePanel extends JPanel {
 
     public CompagniePanel()
     {
-        addPanel( );
+        addPanel();
     }
     
     private void addPanel()

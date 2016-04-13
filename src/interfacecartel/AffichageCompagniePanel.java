@@ -18,13 +18,9 @@ import java.util.logging.Logger;
  */
 public class AffichageCompagniePanel extends JPanel{
     
-    private JLabel adresse;
-    private JLabel cartel;
-    private JLabel sous_compagnies;
-    private JLabel gisements;
-    private JLabel dateDeb;
-    private JLabel dateFin;
-    private JLabel prodJour;
+    private JLabel txtGisements;
+    private JLabel txtSous;
+    private JLabel txtInfos;
     
     public AffichageCompagniePanel()
     {
@@ -34,41 +30,46 @@ public class AffichageCompagniePanel extends JPanel{
     
     private void CreateLayout()
     {
+        txtGisements = new JLabel("gisements");
+        txtSous = new JLabel("sous-compagnies");
+        txtInfos = new JLabel("infos");
+        
         JPanel compagnie = new JPanel();
         compagnie.setLayout(new GridBagLayout());
         
-        String[] gisColumns = {"ID", "Nom", "Pays",
+        String[] infosColumns = {"Nom", "Adresse", "Maison mere", "Cartel"};
+        String[] compColumns = {"ID", "Nom", "Pays",
         "Geolocalisation", "Debut exploitation", "Fin exploitation", "Production journaliere"};
         
-        String[] compColumns = {"ID", "Nom"};
+        String[] compListe = {"ID", "Nom"};
         
-        Object[][] gisData = {
+        Object[][] compData = {
             {"TestID", "teeeeest", "QUÉBEC!", "Quelquepart", "Aujourd'hui", "Demain", "190$"
         },
         {"TestID", "teeeeest", "QUÉBEC!", "Quelquepart", "Aujourd'hui", "Demain", "192$"
         }
         };
         
-        Object[][] compData = { {"4","Geant Dormant"},{"5","Agnico Eagle"}};
+        Object[][] compDataListe = { {"4","Geant Dormant"},{"5","Agnico Eagle"}};
+        
+        Object[][] compInfos = {{"Nom","Ceci est mon adresse", "ceci est ma maison mere", "Cacartel"}};
         
         final JTable table1 = new JTable(compData, compColumns);
-        final JTable table2 = new JTable(gisData, gisColumns);
+        final JTable table2 = new JTable(compDataListe, compListe);
+        final JTable table3 = new JTable (compInfos, infosColumns);
         
         JScrollPane compTable = new JScrollPane(table1);
         JScrollPane gisTable = new JScrollPane(table2);
+        JScrollPane infosTable = new JScrollPane(table3);
         
         Box compagnieBox = Box.createVerticalBox();
         compagnieBox.setPreferredSize( new Dimension( 1000, 300) );
-        
-        adresse = new JLabel("adresse: ");
-        compagnieBox.add(adresse);
-        cartel = new JLabel("cartel: ");
-        compagnieBox.add(cartel);
-        sous_compagnies = new JLabel("sous-compagnies: ");
-        compagnieBox.add(sous_compagnies);
+       
+        compagnieBox.add(txtInfos);
+        compagnieBox.add(infosTable);
+        compagnieBox.add(txtSous);
         compagnieBox.add(compTable);
-        gisements = new JLabel("gisements: ");
-        compagnieBox.add(gisements);
+        compagnieBox.add(txtGisements);
         compagnieBox.add(gisTable);
   
         compagnieBox.setBorder(BorderFactory.createTitledBorder("Compagnie"));

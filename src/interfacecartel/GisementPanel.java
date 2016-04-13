@@ -5,6 +5,8 @@
  */
 package interfacecartel;
 
+import java.awt.Dimension;
+import java.awt.GridBagLayout;
 import javax.swing.*;
 
 /**
@@ -20,6 +22,22 @@ public class GisementPanel extends JPanel {
     }
     private void addPanel()
     {
+        JPanel compagnie = new JPanel();
+        compagnie.setLayout(new GridBagLayout());
+        
+        String[] gisListe = {"Liste des compagnies"};
+        
+        Object[][] gisData = {{"pokemonGisement"}, {"ceci"},{"est"},{"un"},{"ensemble"},{"de"},{"gisements"}
+        , {"ceci"},{"est"},{"un"},{"ensemble"},{"de"},{"gisements"}
+        , {"ceci"},{"est"},{"un"},{"ensemble"},{"de"},{"gisements"}};
+        
+        final JTable table1 = new JTable(gisData, gisListe);
+        
+        JScrollPane gisTable = new JScrollPane(table1);
+        
+        gisTable.setPreferredSize( new Dimension( 300, 200) );
+        this.add(gisTable);
+        
         gisementPanel = new SelectionPanel("Gisement");
         this.add(gisementPanel);
     }

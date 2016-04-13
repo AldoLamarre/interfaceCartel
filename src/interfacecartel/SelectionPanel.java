@@ -22,10 +22,12 @@ public class SelectionPanel extends JPanel{
 
     private JTextField txtSearch;  
     private JButton btnSearch;
+    private String cas;
     
-    public SelectionPanel(String cas)
+    public SelectionPanel(String p_cas)
     {
         super();
+        this.cas = p_cas;
         CreateInterface();
     }
     private void CreateInterface()
@@ -34,14 +36,41 @@ public class SelectionPanel extends JPanel{
         {
             public void actionPerformed(ActionEvent ae)
             {
+                String recherche = txtSearch.getText();
                 txtSearch.setText("Seach Complete");
+                switch (cas) {
+                    case "Gisement":
+             
+                        break;
+                    case "Compagnie":
+                        SELECT * FROM compagnie WHERE nom LIKE recherche;
+                        break;
+                    case "Cartel":
+                        break;
+                    case "default":
+                        break;
+               } 
             }
         };
         
         JPanel instructions = new JPanel();
         instructions.setLayout(new BorderLayout());
         
-        JLabel labelInstruction = new JLabel("Veuillez entrer le nom de la compagnie recherchée");
+        JLabel labelInstruction = new JLabel("Erreur");
+        
+        switch (cas) {
+         case "Gisement":
+             labelInstruction.setText("Veuillez entrer le nom du gisement recherché");
+             break;
+         case "Compagnie":
+             labelInstruction.setText("Veuillez entrer le nom de la compagnie recherchée");
+             break;
+         case "Cartel":
+             labelInstruction.setText("Veuillez entrer le nom de la compagnie recherchée");
+             break;
+         case "default":
+             break;
+        } 
         instructions.add(labelInstruction, BorderLayout.NORTH);
         
         JPanel research = new JPanel();
