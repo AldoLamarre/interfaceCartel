@@ -20,10 +20,10 @@ import java.util.logging.Logger;
  */
 public class SelectionPanel extends JPanel{
 
-    private JTextField txtCompany;  
+    private JTextField txtSearch;  
     private JButton btnSearch;
     
-    public SelectionPanel()
+    public SelectionPanel(String cas)
     {
         super();
         CreateInterface();
@@ -34,20 +34,20 @@ public class SelectionPanel extends JPanel{
         {
             public void actionPerformed(ActionEvent ae)
             {
-                txtCompany.setText("Seach Complete");
+                txtSearch.setText("Seach Complete");
             }
         };
         
         JPanel instructions = new JPanel();
         instructions.setLayout(new BorderLayout());
         
-        JLabel labelInstruction = new JLabel("Veuillez entrer le nom de la compagnie recherchée, son cartel ou l'un de ses gisements");
+        JLabel labelInstruction = new JLabel("Veuillez entrer le nom de la compagnie recherchée");
         instructions.add(labelInstruction, BorderLayout.NORTH);
         
         JPanel research = new JPanel();
-        txtCompany = new JTextField();
-        txtCompany.setPreferredSize( new Dimension( 200, 24 ) );
-        research.add(txtCompany);
+        txtSearch = new JTextField();
+        txtSearch.setPreferredSize( new Dimension( 200, 24 ) );
+        research.add(txtSearch);
         
         btnSearch = new JButton("Search");
         btnSearch.addActionListener(searchListener);

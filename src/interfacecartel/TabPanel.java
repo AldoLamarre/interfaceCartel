@@ -21,10 +21,12 @@ public class TabPanel extends JTabbedPane {
         HomePanel homePanel = new HomePanel(); 
         CompagniePanel companiePanel = new CompagniePanel(); 
         GisementPanel gisementPanel = new GisementPanel(); 
+        CompagniePanel cartelPanel = new CompagniePanel();
         
         this.add("home",homePanel);
         this.add("compagnie",companiePanel);
         this.add("gisement",gisementPanel);
+        this.add("cartel", cartelPanel);
        
     }
     

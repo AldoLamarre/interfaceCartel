@@ -60,5 +60,4 @@ public class CartelPanel extends JPanel {
         tblContainer.setPreferredSize(new Dimension(1000, 300));
 
     }
-
 }

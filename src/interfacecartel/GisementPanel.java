@@ -13,10 +13,14 @@ import javax.swing.*;
  */
 public class GisementPanel extends JPanel {
     
+    private SelectionPanel gisementPanel;
+    
     public GisementPanel() {
-    
-        
-    
+        addPanel();
     }
-    
+    private void addPanel()
+    {
+        gisementPanel = new SelectionPanel("Gisement");
+        this.add(gisementPanel);
+    }
 }
