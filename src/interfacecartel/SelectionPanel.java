@@ -43,7 +43,7 @@ public class SelectionPanel extends JPanel{
              
                         break;
                     case "Compagnie":
-                        SELECT * FROM compagnie WHERE nom LIKE recherche;
+                        //SELECT * FROM compagnie WHERE nom LIKE recherche;
                         break;
                     case "Cartel":
                         break;
