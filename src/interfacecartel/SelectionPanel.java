@@ -66,7 +66,7 @@ public class SelectionPanel extends JPanel{
              labelInstruction.setText("Veuillez entrer le nom de la compagnie recherchée");
              break;
          case "Cartel":
-             labelInstruction.setText("Veuillez entrer le nom de la compagnie recherchée");
+             labelInstruction.setText("Veuillez entrer le nom du cartel recherché");
              break;
          case "default":
              break;

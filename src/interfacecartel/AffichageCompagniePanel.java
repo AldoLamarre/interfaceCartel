@@ -34,9 +34,6 @@ public class AffichageCompagniePanel extends JPanel{
         txtSous = new JLabel("sous-compagnies");
         txtInfos = new JLabel("infos");
         
-        JPanel compagnie = new JPanel();
-        compagnie.setLayout(new GridBagLayout());
-        
         String[] infosColumns = {"Nom", "Adresse", "Maison mere", "Cartel"};
         String[] compColumns = {"ID", "Nom", "Pays",
         "Geolocalisation", "Debut exploitation", "Fin exploitation", "Production journaliere"};
