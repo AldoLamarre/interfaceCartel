@@ -5,13 +5,8 @@
  */
 package interfacecartel;
 
-import java.awt.Dimension;
-import java.awt.GridBagLayout;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.awt.*;
 
 /**
  *
@@ -40,9 +35,9 @@ public class AffichageGisement extends JPanel {
         String[] prodColumns = {"Capacité estimée", "Capacité réelle", "Année"};
         String[] ciesColumns = {"Nom du Cartel", "Nom de la Compagnie", "Date Début", "Date Fin"};
 
-        Object[][] infosData = {{"ID", "Nom", "Pays", "Description", "Géolocalisation"}};
-        Object[][] prodData = {{"Capacité estimée", "Capacité réelle", "Année"}};
-        Object[][] ciesData = {{"Nom du Cartel", "Nom de la Compagnie", "Date Début", "Date Fin"}};
+        Object[][] infosData = new Object[0][0];
+        Object[][] prodData = new Object[0][0];
+        Object[][] ciesData = new Object[0][0];
 
         tableInfo = new JTable(infosData, infosColumns);
         tableProd = new JTable(prodData, prodColumns);

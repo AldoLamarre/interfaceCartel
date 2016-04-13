@@ -6,14 +6,13 @@
 package interfacecartel;
 
 import databaseConnection.MysqlConnection;
-import interfacecartel.InterfaceCartel;
-import java.awt.Dimension;
-import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -53,6 +52,7 @@ public class CompagniePanel extends JPanel {
         affComPan = new AffichageCompagniePanel();
         this.add(selectionPanel);
         this.add(affComPan);
+        selectionPanel.btnSearch.doClick();
     }
 
     private class SearchEvent implements ActionListener {
@@ -60,7 +60,9 @@ public class CompagniePanel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent ae) {
             JTextField jtxt = selectionPanel.getJTxt();
-            String rq = "SELECT * FROM compagnie WHERE nom like '" + jtxt.getText() + "%';";
+            String rq = "SELECT nom FROM compagnie WHERE nom like '%" + jtxt.getText() + "%';";
+            table3.clearSelection();
+
             msq.send_request(rq, table3);
 
         }

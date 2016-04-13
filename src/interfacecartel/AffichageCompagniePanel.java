@@ -5,13 +5,8 @@
  */
 package interfacecartel;
 
-import java.awt.Dimension;
-import java.awt.GridBagLayout;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.awt.*;
 
 /**
  *
@@ -46,16 +41,11 @@ public class AffichageCompagniePanel extends JPanel {
 
         String[] compListe = {"ID", "Nom"};
 
-        Object[][] compData = {
-            {"TestID", "teeeeest", "QUÉBEC!", "Quelquepart", "Aujourd'hui", "Demain", "190$"
-            },
-            {"TestID", "teeeeest", "QUÉBEC!", "Quelquepart", "Aujourd'hui", "Demain", "192$"
-            }
-        };
+        Object[][] compData = new Object[0][0];
 
-        Object[][] compDataListe = {{"4", "Geant Dormant"}, {"5", "Agnico Eagle"}};
+        Object[][] compDataListe = new Object[0][0];
 
-        Object[][] compInfos = {{"Nom", "Ceci est mon adresse", "ceci est ma maison mere", "Cacartel"}};
+        Object[][] compInfos = new Object[0][0];
 
         tableCpnyData = new JTable(compData, compColumns);
         tableCpnyGisement = new JTable(compDataListe, compListe);

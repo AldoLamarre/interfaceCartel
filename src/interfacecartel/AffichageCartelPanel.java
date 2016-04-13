@@ -5,13 +5,8 @@
  */
 package interfacecartel;
 
-import java.awt.Dimension;
-import java.awt.GridBagLayout;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.awt.*;
 
 /**
  *
@@ -44,10 +39,10 @@ public class AffichageCartelPanel extends JPanel {
         String[] ciesColumns = {"Nom du Cartel", "Nom de la Compagnie", "Date Début", "Date Fin"};
         String[] gisColumns = {"ID", "Nom", "Pays", "Description", "Géolocalisation"};
 
-        Object[][] infosData = {{"nom"}};
-        Object[][] gisData = {{"ID", "Nom", "Pays", "Description", "Géolocalisation"}};
-        Object[][] prodData = {{"Capacité estimée", "Capacité réelle", "Année"}};
-        Object[][] ciesData = {{"Nom du Cartel", "Nom de la Compagnie", "Date Début", "Date Fin"}};
+        Object[][] infosData = new Object[0][0];
+        Object[][] gisData = new Object[0][0];
+        Object[][] prodData = new Object[0][0];
+        Object[][] ciesData = new Object[0][0];
 
         tableGis = new JTable(gisData, gisColumns);
         tableInfo = new JTable(infosData, infosColumns);

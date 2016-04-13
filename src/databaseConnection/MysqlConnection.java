@@ -5,12 +5,16 @@
  */
 package databaseConnection;
 
-import com.mysql.jdbc.jdbc2.optional.*;
-import java.sql.*;
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+import net.proteanit.sql.DbUtils;
+
+import javax.swing.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import net.proteanit.sql.DbUtils;
-import javax.swing.*;
 
 /**
  *
@@ -18,7 +22,7 @@ import javax.swing.*;
  */
 public class MysqlConnection {
 
-    String user = "root";
+    String user = "ift2935APP";
     String password = "";
     String server = "localhost";
     String dbName = "cartel";

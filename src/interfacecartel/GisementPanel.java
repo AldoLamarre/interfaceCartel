@@ -6,13 +6,13 @@
 package interfacecartel;
 
 import databaseConnection.MysqlConnection;
-import java.awt.Dimension;
-import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -36,7 +36,7 @@ public class GisementPanel extends JPanel {
 
         String[] gisListe = {"Liste des gisements"};
 
-        Object[][] gisData = {{"pokemonGisement"}, {"ceci"}, {"est"}, {"un"}, {"ensemble"}, {"de"}, {"gisements"}, {"ceci"}, {"est"}, {"un"}, {"ensemble"}, {"de"}, {"gisements"}, {"ceci"}, {"est"}, {"un"}, {"ensemble"}, {"de"}, {"gisements"}};
+        Object[][] gisData = new Object[0][0];
 
         table1 = new JTable(gisData, gisListe);
 
@@ -46,7 +46,7 @@ public class GisementPanel extends JPanel {
         this.add(gisTable);
 
         gisementPanel = new SelectionPanel("Gisement");
-        gisementPanel = new SelectionPanel("Compagnie");
+        //gisementPanel = new SelectionPanel("Compagnie");
         gisementPanel.btnSearch.addActionListener(new SearchEvent());
         ListSelectionModel lMdl = table1.getSelectionModel();
         lMdl.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -56,6 +56,7 @@ public class GisementPanel extends JPanel {
 
         this.add(gisementPanel);
         this.add(affGisPan);
+        this.gisementPanel.btnSearch.doClick();
     }
 
     private class SearchEvent implements ActionListener {
@@ -63,7 +64,8 @@ public class GisementPanel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent ae) {
             JTextField jtxt = gisementPanel.getJTxt();
-            String rq = "SELECT nom FROM gisement WHERE nom like '" + jtxt.getText() + "%';";
+            String rq = "SELECT nom FROM gisement WHERE nom like '%" + jtxt.getText() + "%';";
+            table1.clearSelection();
             msq.send_request(rq, table1);
 
         }

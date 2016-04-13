@@ -6,13 +6,13 @@
 package interfacecartel;
 
 import databaseConnection.MysqlConnection;
-import java.awt.Dimension;
-import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -36,7 +36,7 @@ public class CartelPan extends JPanel {
 
         String[] cartelListe = {"Liste des cartels"};
 
-        Object[][] gisData = {{"Cartel1"}};
+        Object[][] gisData = new Object[0][0];
 
         tableCartel = new JTable(gisData, cartelListe);
 
@@ -56,6 +56,7 @@ public class CartelPan extends JPanel {
 
         this.add(cartelPanel);
         this.add(affCartelPan);
+        cartelPanel.btnSearch.doClick();
 
     }
 
@@ -64,8 +65,10 @@ public class CartelPan extends JPanel {
         @Override
         public void actionPerformed(ActionEvent ae) {
             JTextField jtxt = cartelPanel.getJTxt();
-            String rq = "SELECT nom FROM cartel WHERE nom like '" + jtxt.getText() + "%';";
+            String rq = "SELECT nom FROM cartel WHERE nom like '%" + jtxt.getText() + "%';";
+            tableCartel.clearSelection();
             msq.send_request(rq, tableCartel);
+
 
         }
 
