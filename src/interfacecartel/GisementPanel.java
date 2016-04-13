@@ -16,6 +16,7 @@ import javax.swing.*;
 public class GisementPanel extends JPanel {
     
     private SelectionPanel gisementPanel;
+    private AffichageGisement affGisPan;
     
     public GisementPanel() {
         addPanel();
@@ -25,7 +26,7 @@ public class GisementPanel extends JPanel {
         JPanel compagnie = new JPanel();
         compagnie.setLayout(new GridBagLayout());
         
-        String[] gisListe = {"Liste des compagnies"};
+        String[] gisListe = {"Liste des gisements"};
         
         Object[][] gisData = {{"pokemonGisement"}, {"ceci"},{"est"},{"un"},{"ensemble"},{"de"},{"gisements"}
         , {"ceci"},{"est"},{"un"},{"ensemble"},{"de"},{"gisements"}
@@ -39,6 +40,8 @@ public class GisementPanel extends JPanel {
         this.add(gisTable);
         
         gisementPanel = new SelectionPanel("Gisement");
+        affGisPan = new AffichageGisement();
         this.add(gisementPanel);
+        this.add(affGisPan);
     }
 }

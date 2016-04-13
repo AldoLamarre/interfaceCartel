@@ -56,6 +56,7 @@ public class SelectionPanel extends JPanel {
         JLabel labelInstruction = new JLabel("Erreur");
 
         switch (cas) {
+
             case "Gisement":
                 labelInstruction.setText("Veuillez entrer le nom du gisement recherché");
                 break;

@@ -36,6 +36,7 @@ public class AffichageCompagniePanel extends JPanel {
         txtSous = new JLabel("sous-compagnies");
         txtInfos = new JLabel("infos");
 
+
         JPanel compagnie = new JPanel();
         compagnie.setLayout(new GridBagLayout());
 
