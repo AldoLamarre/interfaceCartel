@@ -48,7 +48,7 @@ public class CartelPanel extends JPanel {
             
             
             });*/
-        msq.send_request("SELECT * FROM Cartel", compagnie);
+        msq.send_request("SELECT nom AS Cartels FROM Cartel", compagnie);
 
         tblContainer.setBorder(BorderFactory.createEmptyBorder());
         tblContainer.setViewportBorder(null);

@@ -31,7 +31,7 @@ public class SelectionPanel extends JPanel {
     }
 
     private void CreateInterface() {
-        ActionListener searchListener = new ActionListener() {
+       /* ActionListener searchListener = new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 String recherche = txtSearch.getText();
                 txtSearch.setText("Seach Complete");
@@ -48,7 +48,7 @@ public class SelectionPanel extends JPanel {
                         break;
                 }
             }
-        };
+        };*/
 
         JPanel instructions = new JPanel();
         instructions.setLayout(new BorderLayout());
@@ -77,7 +77,7 @@ public class SelectionPanel extends JPanel {
         research.add(txtSearch);
 
         btnSearch = new JButton("Search");
-        btnSearch.addActionListener(searchListener);
+        //btnSearch.addActionListener(searchListener);
         research.add(btnSearch);
 
         instructions.add(research, BorderLayout.CENTER);

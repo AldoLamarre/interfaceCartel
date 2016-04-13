@@ -78,16 +78,17 @@ public class CartelPan extends JPanel {
             String s = (String) tableCartel.getValueAt(tableCartel.getSelectedRow(), 0);
             String reqInfo = "SELECT nom FROM cartel WHERE nom = \"" + s + "\";";
             String reqGis = "SELECT * FROM (SELECT nomCartel, idGisement FROM (SELECT t2.nomCartel, t1.nom FROM compagnie AS t1 JOIN membrecartel  AS t2 ON t1.nom = t2.nomCompagnie) AS t3 JOIN exploitationgisement AS t4 ON t3.nom = t4.nomCompagnie) AS t3 JOIN gisement AS t4 ON t3.idGisement = t4.id WHERE nomCartel = \"" + s + "\"";
-            String reqProd = "SELECT * FROM (production STRAIGHT_JOIN ("+reqGis+") as t1);";
+            String reqProdGis = "SELECT * FROM (production STRAIGHT_JOIN ("+reqGis+") as t1);";
             String reqCpny = "SELECT * FROM compagnie WHERE nom = ANY(SELECT nomCompagnie FROM membrecartel WHERE nomCartel = \"" + s + "\");";
-
-            msq.send_request(reqProd, affCartelPan.tableProd);
+            String reqProdCpny="SELECT SUM(capacitelimite) AS Total FROM compagnie WHERE nom = ANY(SELECT nomCompagnie FROM membrecartel WHERE nomCartel = \"" + s + "\");";
+            
+            msq.send_request(reqProdCpny, affCartelPan.tableProd);
 
             msq.send_request(reqCpny, affCartelPan.tableCies);
 
             msq.send_request(reqInfo, affCartelPan.tableInfo);
             
-            msq.send_request(reqGis, affCartelPan.tableGis);
+            msq.send_request(reqProdGis, affCartelPan.tableGis);
 
         }
 
