@@ -18,29 +18,26 @@ import java.util.logging.Logger;
  *
  * @author Maxime
  */
-public class SelectionPanel extends JPanel{
+public class SelectionPanel extends JPanel {
 
-    private JTextField txtSearch;  
-    private JButton btnSearch;
-    private String cas;
-    
-    public SelectionPanel(String p_cas)
-    {
+    public JTextField txtSearch;
+    public JButton btnSearch;
+    public String cas;
+
+    public SelectionPanel(String p_cas) {
         super();
         this.cas = p_cas;
         CreateInterface();
     }
-    private void CreateInterface()
-    {
-        ActionListener searchListener = new ActionListener()
-        {
-            public void actionPerformed(ActionEvent ae)
-            {
+
+    private void CreateInterface() {
+        ActionListener searchListener = new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
                 String recherche = txtSearch.getText();
                 txtSearch.setText("Seach Complete");
                 switch (cas) {
                     case "Gisement":
-             
+
                         break;
                     case "Compagnie":
                         //SELECT * FROM compagnie WHERE nom LIKE recherche;
@@ -49,40 +46,44 @@ public class SelectionPanel extends JPanel{
                         break;
                     case "default":
                         break;
-               } 
+                }
             }
         };
-        
+
         JPanel instructions = new JPanel();
         instructions.setLayout(new BorderLayout());
-        
+
         JLabel labelInstruction = new JLabel("Erreur");
-        
+
         switch (cas) {
-         case "Gisement":
-             labelInstruction.setText("Veuillez entrer le nom du gisement recherché");
-             break;
-         case "Compagnie":
-             labelInstruction.setText("Veuillez entrer le nom de la compagnie recherchée");
-             break;
-         case "Cartel":
-             labelInstruction.setText("Veuillez entrer le nom de la compagnie recherchée");
-             break;
-         case "default":
-             break;
-        } 
+            case "Gisement":
+                labelInstruction.setText("Veuillez entrer le nom du gisement recherché");
+                break;
+            case "Compagnie":
+                labelInstruction.setText("Veuillez entrer le nom de la compagnie recherchée");
+                break;
+            case "Cartel":
+                labelInstruction.setText("Veuillez entrer le nom de la compagnie recherchée");
+                break;
+            case "default":
+                break;
+        }
         instructions.add(labelInstruction, BorderLayout.NORTH);
-        
+
         JPanel research = new JPanel();
         txtSearch = new JTextField();
-        txtSearch.setPreferredSize( new Dimension( 200, 24 ) );
+        txtSearch.setPreferredSize(new Dimension(200, 24));
         research.add(txtSearch);
-        
+
         btnSearch = new JButton("Search");
         btnSearch.addActionListener(searchListener);
         research.add(btnSearch);
-        
+
         instructions.add(research, BorderLayout.CENTER);
         this.add(instructions);
-    }   
+    }
+
+    public JTextField getJTxt() {
+        return this.txtSearch;
+    }
 }
