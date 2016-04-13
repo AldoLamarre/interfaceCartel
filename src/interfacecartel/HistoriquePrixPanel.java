@@ -5,11 +5,15 @@
  */
 package interfacecartel;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
+import databaseConnection.*;
+import java.awt.*;
+import java.awt.GridBagLayout;
 
 /**
  *
@@ -29,11 +33,18 @@ public class HistoriquePrixPanel extends JPanel {
     private JToggleButton average;
     private JToggleButton last;
     private JToggleButton first;
-    private JTextField txt;
+    private JTable tbl;
+    private JScrollPane tblContainer;
+    private MysqlConnection msq;
 
     public HistoriquePrixPanel() {
         super();
+        msq = new MysqlConnection();
         createbutton();
+    }
+
+    public JTable getTbl() {
+        return tbl;
     }
 
     private void createbutton() {
@@ -46,10 +57,14 @@ public class HistoriquePrixPanel extends JPanel {
         average = new JToggleButton("Average");
         last = new JToggleButton("last");
         first = new JToggleButton("first");
-        txt = new JTextField();
-        txt.setSize(100, 100);
-        grouptimeHandeler timeHandler = new grouptimeHandeler();
-        
+        tbl = new JTable();
+        tblContainer = new JScrollPane(tbl);
+        tbl.setPreferredSize(new Dimension(1000, 300));
+        msq = new MysqlConnection();
+      
+
+        grouppriceHandeler priceHandler = new grouppriceHandeler();
+
         groupTime.add(year);
         groupTime.add(month);
         groupTime.add(day);
@@ -57,58 +72,79 @@ public class HistoriquePrixPanel extends JPanel {
         groupPrice.add(average);
         groupPrice.add(last);
         groupPrice.add(first);
+
+        average.addActionListener(priceHandler);
+        last.addActionListener(priceHandler);
+        first.addActionListener(priceHandler);
+
+        this.setLayout(new BorderLayout());
+
+        JPanel pnlNorth = new JPanel();
+        JPanel pnlNorthWest = new JPanel();
+        JPanel pnlNorthEast = new JPanel();
+        JPanel pnlcenter = new JPanel();
+
+        pnlNorthWest.add(year);
+        pnlNorthWest.add(month);
+        pnlNorthWest.add(day);
+
+        pnlNorthEast.add(average);
+        pnlNorthEast.add(last);
+        pnlNorthEast.add(first);
+
+        pnlNorth.setLayout(new BorderLayout());
+        pnlNorth.add(pnlNorthWest, BorderLayout.WEST);
+        pnlNorth.add(pnlNorthEast, BorderLayout.EAST);
+        this.add(pnlNorth, BorderLayout.NORTH);
+        this.add(pnlcenter, BorderLayout.CENTER);
+        pnlcenter.setLayout(new GridBagLayout());
+        Box cartelBox = Box.createVerticalBox();
+        cartelBox.setPreferredSize(new Dimension(1000, 300));
+        cartelBox.add(tblContainer);
         
-        year.addActionListener(timeHandler);
-        month.addActionListener(timeHandler);
-        day.addActionListener(timeHandler);
+        tblContainer.setBorder(BorderFactory.createEmptyBorder());
+        tblContainer.setViewportBorder(null);   
         
-        
-        this.add(year);
-        this.add(month);
-        this.add(day);
-        this.add(average);
-        this.add(last);
-        this.add(first);
-        this.add(txt);
+        this.add(cartelBox);
+        average.doClick();
 
     }
-   
+
     public class grouptimeHandeler implements ActionListener {
-         // patch invoke later
+        // patch invoke later
+
         @Override
         public void actionPerformed(ActionEvent ae) {
-           JToggleButton jtb = (JToggleButton) ae.getSource() ;
-            SwingUtilities.invokeLater(() -> {
-                if (jtb == year) {
-                    txt.setText("Year");
-                } else if (jtb == month) {                    
-                    txt.setText("Month");
-                } else if (jtb == day) {
-                    txt.setText("Day");
-                }              
-                JPanel jpn = (JPanel) jtb.getParent(); 
-                jpn.revalidate();
-           });
+            JToggleButton jtb = (JToggleButton) ae.getSource();
+            HistoriquePrixPanel hpp = (HistoriquePrixPanel) jtb.getParent().getParent().getParent();
+
+            if (jtb == year) { 
+                msq.send_request("SELECT * FROM historiqueprix ", hpp.getTbl());
+            } else if (jtb == month) {
+                msq.send_request("SELECT * FROM historiqueprix", hpp.getTbl());
+            } else if (jtb == day) {
+                msq.send_request("SELECT * FROM historiqueprix", hpp.getTbl());
+            }
+
         }
 
     }
-    
+
     public class grouppriceHandeler implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent ae) {
-           JToggleButton jtb = (JToggleButton) ae.getSource() ;
-            SwingUtilities.invokeLater(() -> {
-                if (jtb == average) {
-                   // TODO
-                } else if (jtb == last) {                    
-                   
-                } else if (jtb == first) {
-                    
-                }              
-                JPanel jpn = (JPanel) jtb.getParent(); 
-                jpn.revalidate();
-           });
+            JToggleButton jtb = (JToggleButton) ae.getSource();
+            HistoriquePrixPanel hpp = (HistoriquePrixPanel) jtb.getParent().getParent().getParent();
+
+            if (jtb == average) {
+                msq.send_request("SELECT * FROM historiqueprix", hpp.getTbl());
+            } else if (jtb == last) {
+                msq.send_request("SELECT * FROM historiqueprix", hpp.getTbl());
+            } else if (jtb == first) {
+                msq.send_request("SELECT * FROM historiqueprix", hpp.getTbl());
+            }
+
         }
 
     }

@@ -60,7 +60,7 @@ public class MysqlConnection {
      * @return
      * @throws SQLException
      */
-    public void send_request(String s, JTable jTbl) throws SQLException {
+    public void send_request(String s, JTable jTbl) {
 
         RunQuery r = new RunQuery() {
             Connection c;
@@ -76,10 +76,31 @@ public class MysqlConnection {
                     rs = st.executeQuery(s);
                     SwingUtilities.invokeLater(() -> {
                         jTbl.setModel(DbUtils.resultSetToTableModel(rs));
+                        JComponent cmp = (JComponent) jTbl.getParent();
+                        while (cmp != null) {
+                            cmp.repaint();
+                            cmp.revalidate();
+                            cmp.setEnabled(true);
+                            cmp.setVisible(true);
+                            try {
+                                cmp = (JComponent) cmp.getParent();
+                            } catch (ClassCastException ec) {
+                                JFrame jf = (JFrame) cmp.getParent();
+                                jf.repaint();
+                                jf.revalidate();
+                                cmp = null;
+
+                            }
+                        }
+
                     });
                     System.out.println(rs.toString());
                 } catch (SQLException ex) {
                     Logger.getLogger(MysqlConnection.class.getName()).log(Level.SEVERE, null, ex);
+                    SwingUtilities.invokeLater(() -> {
+                        JOptionPane.showMessageDialog(null, ex.getMessage());
+
+                    });
                 }
             }
 
@@ -90,24 +111,24 @@ public class MysqlConnection {
 
         };
         Thread t = new Thread(r);
-        t.start();       
+        t.start();
     }
 
     public static void main(String[] args) {
         MysqlConnection msq = new MysqlConnection();
-        JTable jTbltest=  new JTable();
-        JFrame frm = new JFrame();
-        ResultSet rs ;
         
-        try {
-            msq.send_request("SHOW TABLES",jTbltest);
-           // jTbltest = new JTable(DbUtils.resultSetToTableModel(rs));
-            frm.getContentPane().add(jTbltest);
-            //System.out.println(rs.toString());
+        JTable jTbltest = new JTable();
+        JScrollPane tblContainer = new JScrollPane(jTbltest);
+        tblContainer.setBorder(BorderFactory.createEmptyBorder());
+        tblContainer.setViewportBorder(null);        
+        JFrame frm = new JFrame();
+        ResultSet rs;
 
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
+        msq.send_request("SHOW TABLES", jTbltest);
+        // jTbltest = new JTable(DbUtils.resultSetToTableModel(rs));
+        frm.getContentPane().add(tblContainer);
+        //System.out.println(rs.toString());
+
         frm.setSize(1280, 720);
         frm.setVisible(true);
     }

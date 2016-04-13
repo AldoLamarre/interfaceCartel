@@ -5,6 +5,8 @@
  */
 package interfacecartel;
 
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import javax.swing.*;
 
 /**
@@ -23,7 +25,11 @@ public class HomePanel extends JPanel {
     private void addPanel() {
         historiquePrixPanel = new HistoriquePrixPanel();
         cartelPanel = new CartelPanel();
+        
+        this.setLayout(new GridLayout(2,1));
         this.add(historiquePrixPanel);
         this.add(cartelPanel);
+        this.repaint();
+        this.revalidate();
     }
 }

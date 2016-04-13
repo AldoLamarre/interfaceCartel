@@ -15,24 +15,11 @@ public class CartelWindow extends JFrame  {
     
     
     public CartelWindow(){      
-        TabPanel tb = new TabPanel();
+        TabPanel tb = new TabPanel();        
         this.setVisible(true);
         this.setSize(1280, 720);
         this.setContentPane(tb);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
-    
-    public void dummy(){
-        
-    
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                //datarequest here
-                throw new UnsupportedOperationException("Not supported yet."); 
-                //To change body of generated methods, choose Tools | Templates.
-            }
-        });
-    }
-    
+     
 }

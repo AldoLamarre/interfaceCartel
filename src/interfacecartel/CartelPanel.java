@@ -5,6 +5,12 @@
  */
 package interfacecartel;
 
+import databaseConnection.*;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
@@ -17,39 +23,42 @@ public class CartelPanel extends JPanel {
     JButton search;
     JLabel cartelLbl;
     JTable compagnie;
-    JScrollPane tlbcontainer;
-    
-    
+    JScrollPane tblContainer;
+
     public CartelPanel() {
         addcomponent();
     }
 
     private void addcomponent() {
-        cartelTxt = new JTextField();
-        search = new JButton();
-        tlbcontainer= new JScrollPane();
-        
-        compagnie = new JTable();
-        cartelLbl = new JLabel();
-        
-        tlbcontainer.add(compagnie);
-        this.add(cartelTxt);
-        this.add(search);
-        this.add(tlbcontainer);
-        this.add(cartelLbl); 
-        
-    }
-    
-    public class Cartelquery implements Runnable  {
+        //cartelTxt = new JTextField();
+        //search = new JButton();
 
-        @Override
-        public void run() {
+        compagnie = new JTable();
+        tblContainer = new JScrollPane(compagnie);
+        //cartelLbl = new JLabel();
+
+        MysqlConnection msc = new MysqlConnection();
+
+        /* Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
             
-        }
-    
-    
-    
+            
+            }
+            
+            
+            });*/
+        msc.send_request("SELECT * FROM Cartel", compagnie);
+
+        tblContainer.setBorder(BorderFactory.createEmptyBorder());
+        tblContainer.setViewportBorder(null);
+        //this.add(cartelTxt);
+        //this.add(search);
+        this.add(tblContainer);
+        //this.add(cartelLbl); 
+        compagnie.setPreferredSize(new Dimension(1000, 300));;
+        tblContainer.setPreferredSize(new Dimension(1000, 300));
+
     }
-    
-    
+
 }
