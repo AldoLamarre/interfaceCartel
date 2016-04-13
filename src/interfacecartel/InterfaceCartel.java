@@ -18,12 +18,20 @@ public class InterfaceCartel {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        msq = new CustomSQLConnection();
-        SwingUtilities.invokeLater(() -> {
-            CartelWindow cw = new CartelWindow(msq);
-            cw.setVisible(true);
-        });
+        if (args.length == 0){
+            msq = new CustomSQLConnection();
+            SwingUtilities.invokeLater(() -> {
+                CartelWindow cw = new CartelWindow(msq);
+                cw.setVisible(true);
+            });
+        }else if (args.length == 5){
+            msq = new CustomSQLConnection(args[0], args[1], args[2], args[3], Integer.getInteger(args[4]));
+            SwingUtilities.invokeLater(() -> {
+                CartelWindow cw = new CartelWindow(msq);
+                cw.setVisible(true);
+            });
+        }
+
 
     }
 
