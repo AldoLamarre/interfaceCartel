@@ -5,6 +5,7 @@
  */
 package interfacecartel;
 
+import databaseConnection.MysqlConnection;
 import javax.swing.*;
 /**
  *
@@ -12,13 +13,13 @@ import javax.swing.*;
  */
 public class TabPanel extends JTabbedPane {
     
-    public TabPanel() {
-        createtab();
+    public TabPanel(MysqlConnection msq) {
+        createtab(msq);
         
     }
     
-    private void createtab(){
-        HomePanel homePanel = new HomePanel(); 
+    private void createtab(MysqlConnection msq){
+        HomePanel homePanel = new HomePanel(MysqlConnection msq); 
         CompagniePanel companiePanel = new CompagniePanel(); 
         GisementPanel gisementPanel = new GisementPanel(); 
         CompagniePanel cartelPanel = new CompagniePanel();

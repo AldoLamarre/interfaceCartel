@@ -18,14 +18,15 @@ import javax.swing.*;
  * @author Al
  */
 public class CartelPanel extends JPanel {
-
+    MysqlConnection msq;
     JTextField cartelTxt;
     JButton search;
     JLabel cartelLbl;
     JTable compagnie;
     JScrollPane tblContainer;
 
-    public CartelPanel() {
+    public CartelPanel(MysqlConnection msq) {
+        this.msq=msq;
         addcomponent();
     }
 
@@ -34,10 +35,9 @@ public class CartelPanel extends JPanel {
         //search = new JButton();
 
         compagnie = new JTable();
-        tblContainer = new JScrollPane(compagnie);
-        //cartelLbl = new JLabel();
+        tblContainer = new JScrollPane(compagnie);        //cartelLbl = new JLabel();
 
-        MysqlConnection msc = new MysqlConnection();
+       
 
         /* Thread t = new Thread(new Runnable() {
             @Override
@@ -48,7 +48,7 @@ public class CartelPanel extends JPanel {
             
             
             });*/
-        msc.send_request("SELECT * FROM Cartel", compagnie);
+        msq.send_request("SELECT * FROM Cartel", compagnie);
 
         tblContainer.setBorder(BorderFactory.createEmptyBorder());
         tblContainer.setViewportBorder(null);

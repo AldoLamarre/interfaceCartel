@@ -62,7 +62,7 @@ public class MysqlConnection {
      */
     public void send_request(String s, JTable jTbl) {
 
-        RunQuery r = new RunQuery() {
+        Runnable r = new Runnable() {
             Connection c;
             Statement st;
             ResultSet rs;
@@ -103,12 +103,62 @@ public class MysqlConnection {
                     });
                 }
             }
+        };
+        Thread t = new Thread(r);
+        t.start();
+    }
+    
+    /**
+     *
+     * @param s
+     * @param jlbl
+     */
+    public void send_request(String s, JLabel jlbl) {
+
+        Runnable r = new Runnable() {
+            Connection c;
+            Statement st;
+            ResultSet rs;
 
             @Override
-            public ResultSet getRs() {
-                return rs;
-            }
+            public void run() {
 
+                try {
+                    c = dataCartel.getConnection();
+                    st = c.createStatement();
+                    rs = st.executeQuery(s);
+                    String s = rs.getNString(1);
+                    
+                    SwingUtilities.invokeLater(() -> {
+                        
+                        //jTbl.setModel(DbUtils.resultSetToTableModel(rs));
+                        JComponent cmp = (JComponent) jlbl.getParent();
+                        while (cmp != null) {
+                            cmp.repaint();
+                            cmp.revalidate();
+                            cmp.setEnabled(true);
+                            cmp.setVisible(true);
+                            try {
+                                cmp = (JComponent) cmp.getParent();
+                            } catch (ClassCastException ec) {
+                                JFrame jf = (JFrame) cmp.getParent();
+                                jf.repaint();
+                                jf.revalidate();
+                                cmp = null;
+
+                            }
+                        }
+
+                    });
+                    System.out.println(rs.toString());
+                } catch (SQLException ex) {
+                    Logger.getLogger(MysqlConnection.class.getName()).log(Level.SEVERE, null, ex);
+                    SwingUtilities.invokeLater(() -> {
+                        JOptionPane.showMessageDialog(null, ex.getMessage());
+
+                    });
+                }
+            }
         };
         Thread t = new Thread(r);
         t.start();

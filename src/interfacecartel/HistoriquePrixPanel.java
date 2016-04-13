@@ -24,6 +24,7 @@ public class HistoriquePrixPanel extends JPanel {
     final ButtonGroup groupTime = new ButtonGroup();
 
     final ButtonGroup groupPrice = new ButtonGroup();
+    
     private JToggleButton year;
     private JToggleButton month;
     private JToggleButton day;
@@ -37,9 +38,9 @@ public class HistoriquePrixPanel extends JPanel {
     private JScrollPane tblContainer;
     private MysqlConnection msq;
 
-    public HistoriquePrixPanel() {
+    public HistoriquePrixPanel(MysqlConnection msq) {
         super();
-        msq = new MysqlConnection();
+        this.msq = msq;
         createbutton();
     }
 
@@ -61,7 +62,6 @@ public class HistoriquePrixPanel extends JPanel {
         tblContainer = new JScrollPane(tbl);
         tbl.setPreferredSize(new Dimension(1000, 300));
         msq = new MysqlConnection();
-      
 
         grouppriceHandeler priceHandler = new grouppriceHandeler();
 
@@ -86,10 +86,10 @@ public class HistoriquePrixPanel extends JPanel {
 
         pnlNorthWest.add(year);
         pnlNorthWest.add(month);
-        pnlNorthWest.add(day);
+        // pnlNorthWest.add(day);
 
         pnlNorthEast.add(average);
-        pnlNorthEast.add(last);
+        //pnlNorthEast.add(last);
         pnlNorthEast.add(first);
 
         pnlNorth.setLayout(new BorderLayout());
@@ -101,12 +101,11 @@ public class HistoriquePrixPanel extends JPanel {
         Box cartelBox = Box.createVerticalBox();
         cartelBox.setPreferredSize(new Dimension(1000, 300));
         cartelBox.add(tblContainer);
-        
+
         tblContainer.setBorder(BorderFactory.createEmptyBorder());
-        tblContainer.setViewportBorder(null);   
-        
-        this.add(cartelBox);
-        average.doClick();
+        tblContainer.setViewportBorder(null);
+
+        this.add(cartelBox);       
 
     }
 
@@ -116,14 +115,22 @@ public class HistoriquePrixPanel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent ae) {
             JToggleButton jtb = (JToggleButton) ae.getSource();
-            HistoriquePrixPanel hpp = (HistoriquePrixPanel) jtb.getParent().getParent().getParent();
+            HistoriquePrixPanel hpp;
+            hpp = (HistoriquePrixPanel) jtb.getParent().getParent().getParent(); 
+            if (jtb == year) {
+                System.out.println(hpp.groupPrice.isSelected(average.getModel()));
+                if (hpp.groupPrice.isSelected(average.getModel())) {
+                    msq.send_request("SELECT annee, AVG(valeur) AS prixMoyen FROM (SELECT EXTRACT(YEAR FROM dateFin) AS annee,valeur FROM historiqueprix) AS t1 GROUP BY annee;", hpp.getTbl());
+                }
 
-            if (jtb == year) { 
-                msq.send_request("SELECT * FROM historiqueprix ", hpp.getTbl());
             } else if (jtb == month) {
+
                 msq.send_request("SELECT * FROM historiqueprix", hpp.getTbl());
+
             } else if (jtb == day) {
+
                 msq.send_request("SELECT * FROM historiqueprix", hpp.getTbl());
+
             }
 
         }
@@ -135,10 +142,13 @@ public class HistoriquePrixPanel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent ae) {
             JToggleButton jtb = (JToggleButton) ae.getSource();
-            HistoriquePrixPanel hpp = (HistoriquePrixPanel) jtb.getParent().getParent().getParent();
-
+            HistoriquePrixPanel hpp = (HistoriquePrixPanel) jtb.getParent().getParent().getParent();          
+            System.out.println(hpp.groupTime.isSelected(year.getModel()));
             if (jtb == average) {
-                msq.send_request("SELECT * FROM historiqueprix", hpp.getTbl());
+                if (hpp.groupTime.isSelected(year.getModel())) {
+                    String rq = "SELECT annee, AVG(valeur) AS prixMoyen FROM (SELECT EXTRACT(YEAR FROM dateFin) AS annee,valeur FROM historiqueprix) AS t1 GROUP BY annee;";
+                    msq.send_request(rq, hpp.getTbl());
+                }
             } else if (jtb == last) {
                 msq.send_request("SELECT * FROM historiqueprix", hpp.getTbl());
             } else if (jtb == first) {

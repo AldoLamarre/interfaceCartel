@@ -5,6 +5,7 @@
  */
 package interfacecartel;
 
+import databaseConnection.MysqlConnection;
 import javax.swing.*;
 
 /**
@@ -14,8 +15,8 @@ import javax.swing.*;
 public class CartelWindow extends JFrame  {
     
     
-    public CartelWindow(){      
-        TabPanel tb = new TabPanel();        
+    public CartelWindow(MysqlConnection msq){      
+        TabPanel tb = new TabPanel(msq);        
         this.setVisible(true);
         this.setSize(1280, 720);
         this.setContentPane(tb);
