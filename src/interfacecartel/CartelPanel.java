@@ -7,10 +7,6 @@ package interfacecartel;
 
 import databaseConnection.*;
 import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
@@ -18,14 +14,14 @@ import javax.swing.*;
  * @author Al
  */
 public class CartelPanel extends JPanel {
-    MysqlConnection msq;
+    CustomSQLConnection msq;
     JTextField cartelTxt;
     JButton search;
     JLabel cartelLbl;
     JTable compagnie;
     JScrollPane tblContainer;
 
-    public CartelPanel(MysqlConnection msq) {
+    public CartelPanel(CustomSQLConnection msq) {
         this.msq=msq;
         addcomponent();
     }

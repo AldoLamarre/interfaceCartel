@@ -5,7 +5,7 @@
  */
 package interfacecartel;
 
-import databaseConnection.MysqlConnection;
+import databaseConnection.CustomSQLConnection;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -20,12 +20,12 @@ import java.awt.event.ActionListener;
  */
 public class CartelPan extends JPanel {
 
-    MysqlConnection msq;
+    CustomSQLConnection msq;
     private SelectionPanel cartelPanel;
     private AffichageCartelPanel affCartelPan;
     JTable tableCartel;
 
-    public CartelPan(MysqlConnection msq) {
+    public CartelPan(CustomSQLConnection msq) {
         this.msq = msq;
         addPanel();
     }
@@ -56,7 +56,7 @@ public class CartelPan extends JPanel {
 
         this.add(cartelPanel);
         this.add(affCartelPan);
-        cartelPanel.btnSearch.doClick();
+        //cartelPanel.btnSearch.doClick();
 
     }
 
@@ -95,5 +95,9 @@ public class CartelPan extends JPanel {
 
         }
 
+    }
+
+    public SelectionPanel getCartelPanel() {
+        return cartelPanel;
     }
 }

@@ -5,10 +5,10 @@
  */
 package interfacecartel;
 
-import databaseConnection.MysqlConnection;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
+import databaseConnection.CustomSQLConnection;
+
 import javax.swing.*;
+import java.awt.*;
 
 /**
  *
@@ -19,18 +19,23 @@ public class HomePanel extends JPanel {
     private HistoriquePrixPanel historiquePrixPanel;
     private CartelPanel cartelPanel;
 
-    public HomePanel(MysqlConnection msq) {
+    public HomePanel(CustomSQLConnection msq) {
         addPanel(msq);
     }
 
-    private void addPanel(MysqlConnection msq) {
-        historiquePrixPanel = new HistoriquePrixPanel( msq);
-        cartelPanel = new CartelPanel( msq);
-        
-        this.setLayout(new GridLayout(2,1));
+    private void addPanel(CustomSQLConnection msq) {
+        historiquePrixPanel = new HistoriquePrixPanel(msq);
+        cartelPanel = new CartelPanel(msq);
+
+        this.setLayout(new GridLayout(2, 1));
         this.add(historiquePrixPanel);
         this.add(cartelPanel);
         this.repaint();
         this.revalidate();
     }
+
+    public HistoriquePrixPanel getHistoriquePrixPanel() {
+        return historiquePrixPanel;
+    }
+
 }

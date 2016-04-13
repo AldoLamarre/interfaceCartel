@@ -5,7 +5,7 @@
  */
 package interfacecartel;
 
-import databaseConnection.MysqlConnection;
+import databaseConnection.CustomSQLConnection;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -20,12 +20,12 @@ import java.awt.event.ActionListener;
  */
 public class GisementPanel extends JPanel {
 
-    MysqlConnection msq;
+    CustomSQLConnection msq;
     private SelectionPanel gisementPanel;
     private AffichageGisement affGisPan;
     JTable table1;
 
-    public GisementPanel(MysqlConnection msq) {
+    public GisementPanel(CustomSQLConnection msq) {
         this.msq = msq;
         addPanel();
     }
@@ -56,7 +56,7 @@ public class GisementPanel extends JPanel {
 
         this.add(gisementPanel);
         this.add(affGisPan);
-        this.gisementPanel.btnSearch.doClick();
+        //this.gisementPanel.btnSearch.doClick();
     }
 
     private class SearchEvent implements ActionListener {
@@ -89,5 +89,9 @@ public class GisementPanel extends JPanel {
 
         }
 
+    }
+
+    public SelectionPanel getGisementPanel() {
+        return gisementPanel;
     }
 }

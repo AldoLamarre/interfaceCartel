@@ -5,7 +5,7 @@
  */
 package interfacecartel;
 
-import databaseConnection.MysqlConnection;
+import databaseConnection.CustomSQLConnection;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -22,10 +22,10 @@ public class CompagniePanel extends JPanel {
 
     private SelectionPanel selectionPanel;
     private AffichageCompagniePanel affComPan;
-    MysqlConnection msq;
+    CustomSQLConnection msq;
     JTable table3;
 
-    public CompagniePanel(MysqlConnection msq) {
+    public CompagniePanel(CustomSQLConnection msq) {
         this.msq = msq;
         addPanel();
     }
@@ -52,7 +52,7 @@ public class CompagniePanel extends JPanel {
         affComPan = new AffichageCompagniePanel();
         this.add(selectionPanel);
         this.add(affComPan);
-        selectionPanel.btnSearch.doClick();
+        //selectionPanel.btnSearch.doClick();
     }
 
     private class SearchEvent implements ActionListener {
@@ -88,4 +88,7 @@ public class CompagniePanel extends JPanel {
 
     }
 
+    public SelectionPanel getSelectionPanel() {
+        return selectionPanel;
+    }
 }

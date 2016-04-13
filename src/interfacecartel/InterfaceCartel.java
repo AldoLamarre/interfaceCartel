@@ -5,7 +5,7 @@
  */
 package interfacecartel;
 
-import databaseConnection.MysqlConnection;
+import databaseConnection.CustomSQLConnection;
 import javax.swing.SwingUtilities;
 
 /**
@@ -13,13 +13,13 @@ import javax.swing.SwingUtilities;
  * @author Al
  */
 public class InterfaceCartel {
-    public static MysqlConnection msq;
+    public static CustomSQLConnection msq;
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        msq = new MysqlConnection();
+        msq = new CustomSQLConnection();
         SwingUtilities.invokeLater(() -> {
             CartelWindow cw = new CartelWindow(msq);
             cw.setVisible(true);
