@@ -21,8 +21,8 @@ public class TabPanel extends JTabbedPane {
     private void createtab(MysqlConnection msq){
         HomePanel homePanel = new HomePanel(msq); 
         CompagniePanel companiePanel = new CompagniePanel(msq); 
-        GisementPanel gisementPanel = new GisementPanel(); 
-        CartelPan cartelPanel = new CartelPan();
+        GisementPanel gisementPanel = new GisementPanel(msq); 
+        CartelPan cartelPanel = new CartelPan(msq);
         
         this.add("home",homePanel);
         this.add("compagnie",companiePanel);

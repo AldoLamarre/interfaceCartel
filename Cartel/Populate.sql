@@ -1,4 +1,5 @@
 
+USE cartel;
 
 INSERT INTO cartel(nom) VALUES
 	('BESSETTE ENTERPRISES'),

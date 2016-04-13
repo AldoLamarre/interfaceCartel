@@ -55,7 +55,7 @@ public class CompagniePanel extends JPanel {
         this.add(affComPan);
     }
 
-    public class SearchEvent implements ActionListener {
+    private class SearchEvent implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent ae) {
@@ -67,7 +67,7 @@ public class CompagniePanel extends JPanel {
 
     }
 
-    public class SelectEvent implements ListSelectionListener {
+    private class SelectEvent implements ListSelectionListener {
 
         @Override
         public void valueChanged(ListSelectionEvent lse) {
